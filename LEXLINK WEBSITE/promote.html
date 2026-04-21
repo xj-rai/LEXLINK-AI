@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexLink AI | Legal Tech Platform</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        :root {
+            --primary-green: #1b4332;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --text-gray: rgba(255, 255, 255, 0.82);
+            --text-muted: rgba(255, 255, 255, 0.62);
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.14);
+            --card-border: rgba(255, 255, 255, 0.10);
+            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.20);
+            --shadow-strong: 0 22px 48px rgba(0, 0, 0, 0.28);
+            --transition-smooth: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 28%),
+                linear-gradient(135deg, #163d2d 0%, #75878d 50%, #163d2d 100%);
+            background-attachment: fixed;
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page-width {
+            width: min(1280px, calc(100% - 80px));
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 3rem;
+            line-height: 1.15;
+            color: var(--white);
+        }
+
+        .section-subtitle {
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        nav {
+            width: calc(100% - 56px);
+            max-width: 1360px;
+            margin: 1rem auto 0;
+            padding: 0.85rem 1.6rem;
+            min-height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            position: sticky;
+            top: 0.8rem;
+            z-index: 999;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 999px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--gold);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+            list-style: none;
+            margin-left: auto;
+            margin-right: 1rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-size: 0.95rem;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+            opacity: 1;
+        }
+
+        .mobile-download {
+            display: none;
+        }
+
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(135deg, #d4af37, #e6c65b);
+            color: #173626;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 24px rgba(212, 175, 55, 0.22);
+            transition: var(--transition-smooth);
+            white-space: nowrap;
+        }
+
+        .btn-pill:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #e0bf4a, #f0d87b);
+            box-shadow: 0 14px 32px rgba(212, 175, 55, 0.28);
+        }
+
+        .hero .btn-pill {
+            font-weight: 800 !important;
+            letter-spacing: 0.25px;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.8rem 1.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.8);
+            color: #f0d87b;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-outline:hover {
+            transform: translateY(-3px);
+            background: var(--gold);
+            color: #173626;
+        }
+
+        .menu-toggle {
+            display: none;
+            border: none;
+            background: transparent;
+            color: var(--white);
+            font-size: 1.7rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0.35rem 0.55rem;
+            border-radius: 12px;
+            transition: var(--transition-smooth);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(27, 67, 50, 0.65);
+        }
+
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 998;
+            background: rgba(5, 10, 8, 0.18);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .menu-backdrop.show {
+            display: block;
+        }
+
+        .hero {
+            width: min(1280px, calc(100% - 80px));
+            margin: 0 auto;
+            padding: 3.5rem 0 4.5rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .hero-text {
+            max-width: 700px;
+        }
+
+        .hero-text h1 {
+            margin-bottom: 1.5rem;
+            font-family: "Playfair Display", serif;
+            font-size: 4.4rem;
+            line-height: 1.05;
+            letter-spacing: -1px;
+            color: var(--white);
+        }
+
+        .hero-text p {
+            max-width: 100%;
+            margin-bottom: 3rem;
+            color: var(--text-gray);
+            font-size: 1.15rem;
+            font-weight: 300;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-frame {
+            width: 280px;
+            height: 560px;
+            padding: 10px;
+            display: flex;
+            position: relative;
+            background-color: #011108;
+            border: 2px solid #2a2a2a;
+            border-radius: 36px;
+            box-shadow:
+                0 26px 50px rgba(0, 0, 0, 0.75),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            transition: var(--transition-smooth);
+        }
+
+        .phone-frame::before {
+            content: "";
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 72px;
+            height: 18px;
+            background-color: #000;
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        .phone-frame:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02);
+            border-color: var(--gold);
+            box-shadow:
+                0 40px 80px rgba(0, 0, 0, 0.9),
+                0 0 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .phone-inner {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+            border-radius: 30px;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background-image: url("IMAGE.PNG");
+            background-size: cover;
+            background-position: top center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .editorial-grid {
+            width: min(1280px, calc(100% - 80px));
+            margin: 0 auto;
+            padding: 5rem 0;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 3rem;
+        }
+
+        .clean-col {
+            padding-left: 1.8rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.12);
+            transition: var(--transition-smooth);
+        }
+
+        .clean-col:hover {
+            border-left-color: var(--gold);
+        }
+
+        .clean-col h3 {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 1rem;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .clean-col h3 svg {
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .clean-col p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        #solution {
+            width: min(1280px, calc(100% - 80px));
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            padding: 1rem 0 5rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            gap: 1.3rem;
+        }
+
+        .feature-img {
+            width: 100%;
+            height: 240px;
+            background-color: #000;
+            background-size: cover;
+            background-position: center;
+            border-radius: 22px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            transition: var(--transition-smooth);
+        }
+
+        .feature-item:hover .feature-img {
+            transform: translateY(-8px);
+            box-shadow:
+                0 28px 56px rgba(0, 0, 0, 0.42),
+                0 0 18px rgba(212, 175, 55, 0.16);
+        }
+
+        .img-1 {
+            background-image: url("CLASSIFICATION.JPG");
+        }
+
+        .img-2 {
+            background-image: url("LAWYER.GIF");
+        }
+
+        .img-3 {
+            background-image: url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80");
+        }
+
+        .feature-item h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .feature-item h4 svg {
+            color: var(--gold);
+        }
+
+        .feature-item p {
+            color: var(--text-gray);
+            font-size: 0.96rem;
+            font-weight: 300;
+        }
+
+        .map-section {
+            width: min(1280px, calc(100% - 80px));
+            margin: 0 auto;
+            padding: 5rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .map-content h3 {
+            margin-bottom: 1.5rem;
+            font-family: "Playfair Display", serif;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            color: var(--white);
+        }
+
+        .map-content p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .map-visual {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .extra-info {
+            width: min(1100px, calc(100% - 80px));
+            margin: 0 auto;
+            padding: 1rem 0 4rem;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 3rem;
+        }
+
+        .extra-text h3 {
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .extra-text p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .promo-section {
+            width: min(1280px, calc(100% - 80px));
+            margin: 0 auto;
+            padding: 0 0 5rem;
+        }
+
+        .promo-box {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: #1b4332;
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            box-shadow: var(--shadow-strong);
+            transition: var(--transition-smooth);
+        }
+
+        .promo-box:hover {
+            transform: translateY(-6px);
+        }
+
+        .promo-box h2 {
+            margin-bottom: 1rem;
+            font-family: "Playfair Display", serif;
+            font-size: 3rem;
+            line-height: 1.2;
+            color: var(--white);
+        }
+
+        .promo-box p {
+            max-width: 760px;
+            margin: 0 auto 2rem;
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .promo-highlight {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.4rem;
+            margin: 2rem 0 2.2rem;
+            text-align: left;
+        }
+
+        .testimonial-card {
+            padding: 1.25rem 1.2rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+        }
+
+        .testimonial-rating {
+            margin-bottom: 0.7rem;
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .testimonial-card p {
+            margin: 0 0 0.9rem;
+            max-width: none;
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.84);
+        }
+
+        .testimonial-meta {
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .promo-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .pricing-section {
+            width: min(1280px, calc(100% - 80px));
+            margin: 0 auto;
+            padding: 5rem 0;
+        }
+
+        .pricing-title-wrap {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-title-wrap h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .pricing-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 3rem;
+        }
+
+        .price-card {
+            padding: 4rem 3rem;
+            background: #1b4332;
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow-strong);
+            transition: var(--transition-smooth);
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .price-card.premium {
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            box-shadow:
+                0 24px 52px rgba(0, 0, 0, 0.28),
+                0 0 0 1px rgba(212, 175, 55, 0.06) inset;
+        }
+
+        .price-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            font-size: 1.8rem;
+        }
+
+        .price-card .cost {
+            display: block;
+            margin-bottom: 2rem;
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .price-card .cost small {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .price-card li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+            font-weight: 300;
+        }
+
+        .price-card li svg {
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .timeline-section {
+            width: min(1280px, calc(100% - 80px));
+            margin: 0 auto;
+            padding: 5rem 0;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .timeline-grid::before {
+            content: "";
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                rgba(212, 175, 55, 0.08),
+                var(--gold),
+                rgba(212, 175, 55, 0.08)
+            );
+            z-index: 0;
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-node {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #09130f;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+        }
+
+        .timeline-step h4 {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-step p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .team-section {
+            width: calc(100% - 24px);
+            max-width: 1320px;
+            margin: 4rem auto 0;
+            padding: 4rem 5% 3rem;
+            text-align: center;
+            background: rgba(27, 67, 50, 0.30);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 36px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .team-section h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 3rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .team-section > p {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+        }
+
+        .dev-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 2.2rem 1.4rem;
+        }
+
+        .dev-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: var(--transition-smooth);
+        }
+
+        .dev-profile:hover {
+            transform: translateY(-8px);
+        }
+
+        .dev-img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 50%;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+        }
+
+        .dev-profile:hover .dev-img {
+            border-color: rgba(212, 175, 55, 0.85);
+            box-shadow: 0 18px 34px rgba(212, 175, 55, 0.18);
+        }
+
+        .dev-name {
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .dev-role {
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .dev-desc {
+            max-width: 90%;
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--text-gray);
+        }
+
+        .copyright {
+            margin-top: 3.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-weight: 300;
+            font-size: 0.85rem;
+        }
+
+        .site-footer {
+            width: calc(100% - 24px);
+            max-width: 1320px;
+            margin: 4rem auto 1rem;
+            padding: 3rem 5% 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 32px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .footer-brand h3,
+        .footer-links h4 {
+            color: var(--white);
+            margin-bottom: 0.9rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .footer-brand p,
+        .footer-links p,
+        .footer-links a {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-copy {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1200px) {
+            .hero {
+                grid-template-columns: minmax(0, 1fr) 300px;
+                gap: 2.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3.8rem;
+            }
+
+            .phone-frame {
+                width: 260px;
+                height: 520px;
+            }
+
+            .dev-grid,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-width,
+            .hero,
+            .editorial-grid,
+            #solution,
+            .map-section,
+            .extra-info,
+            .promo-section,
+            .pricing-section,
+            .timeline-section {
+                width: min(100%, calc(100% - 32px));
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 4.5rem 0 5rem;
+                gap: 3rem;
+            }
+
+            .hero-text {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .hero-visual {
+                justify-content: center;
+            }
+
+            .editorial-grid,
+            .features-grid,
+            .map-section,
+            .extra-info,
+            .pricing-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .timeline-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 2.5rem;
+            }
+
+            .timeline-grid::before {
+                display: none;
+            }
+
+            .timeline-node {
+                margin: 0 auto 1.5rem;
+            }
+
+            .promo-box h2,
+            .team-section h2,
+            .pricing-title-wrap h2,
+            .section-title {
+                font-size: 2.3rem;
+            }
+
+            .team-section {
+                width: calc(100% - 16px);
+                border-radius: 28px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                width: calc(100% - 20px);
+                padding: 0.8rem 1rem;
+                border-radius: 26px;
+            }
+
+            .logo {
+                font-size: 1.08rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-download {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: calc(100% + 10px);
+                left: 0;
+                right: 0;
+                width: calc(100% - 12px);
+                margin: 0 auto;
+                padding: 1rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.9rem;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.10);
+                border-radius: 22px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links li a {
+                display: block;
+                width: 100%;
+                padding: 0.85rem 1rem;
+                border-radius: 14px;
+                background: transparent;
+            }
+
+            .nav-links li a:hover {
+                background: rgba(27, 67, 50, 0.55);
+            }
+
+            .nav-links .mobile-download a {
+                background: linear-gradient(135deg, #d4af37, #e6c65b);
+                color: #173626;
+                font-weight: 700;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .phone-frame {
+                width: 230px;
+                height: 460px;
+            }
+
+            .timeline-grid,
+            .dev-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .promo-box,
+            .price-card {
+                padding: 2.3rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                gap: 0.6rem;
+                width: calc(100% - 14px);
+            }
+
+            .logo {
+                font-size: 0.95rem;
+                gap: 8px;
+            }
+
+            .hero,
+            .editorial-grid,
+            #solution,
+            .map-section,
+            .extra-info,
+            .promo-section,
+            .pricing-section,
+            .timeline-section {
+                width: min(100%, calc(100% - 20px));
+            }
+
+            .hero-text h1 {
+                font-size: 2.1rem;
+            }
+
+            .hero-text p,
+            .promo-box p,
+            .map-content p {
+                font-size: 1rem;
+            }
+
+            .section-title,
+            .promo-box h2,
+            .team-section h2,
+            .pricing-title-wrap h2 {
+                font-size: 2rem;
+            }
+
+            .site-footer {
+                width: calc(100% - 14px);
+                border-radius: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            LexLink AI
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#problem">The Gap</a></li>
+            <li><a href="#solution">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#process">Process</a></li>
+            <li class="mobile-download"><a href="#download">Download App</a></li>
+        </ul>
+
+        <a href="#download" class="btn-pill nav-cta">Download App</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+    </nav>
+
+    <div class="menu-backdrop" id="menuBackdrop" onclick="closeMenu()"></div>
+
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>A fair legal system, within reach.</h1>
+            <p>
+                A smart bridge between people and lawyers. Simplify the legal process by
+                connecting your concerns to the right legal expert instantly.
+            </p>
+            <a href="#solution" class="btn-pill">Discover Solutions</a>
+        </div>
+
+        <div class="hero-visual">
+            <div class="phone-frame">
+                <div class="phone-inner">
+                    <div class="phone-screen"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="editorial-grid" id="problem">
+        <div class="clean-col">
+            <h3>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                Confusing Search
+            </h3>
+            <p>
+                The process of searching for legal services is unstructured,
+                time-consuming, and lacks guided assistance, leaving individuals feeling lost.
+            </p>
+        </div>
+
+        <div class="clean-col">
+            <h3>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Communication Barriers
+            </h3>
+            <p>
+                Users often find it difficult to clearly explain their situation,
+                leading to miscommunication and inefficient consultations.
+            </p>
+        </div>
+
+        <div class="clean-col">
+            <h3>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Privacy Concerns
+            </h3>
+            <p>
+                Privacy concerns discourage sharing sensitive info, while locating
+                nearby public attorneys remains a major challenge.
+            </p>
+        </div>
+    </section>
+
+    <section id="solution">
+        <div class="section-header">
+            <span class="section-subtitle">Our Innovation</span>
+            <h2 class="section-title">Intelligent legal solutions.</h2>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-img img-1"></div>
+                <h4>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    AI Case Classification
+                </h4>
+                <p>
+                    Analyzes user concerns through an encrypted chat, instantly identifying
+                    the specific type of legal issue to guide your next step.
+                </p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-img img-2"></div>
+                <h4>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Smart Lawyer Matching
+                </h4>
+                <p>
+                    Recommends suitable attorneys based on specialization, location,
+                    availability, and your unique preferences.
+                </p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-img img-3"></div>
+                <h4>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Secure Consultation
+                </h4>
+                <p>
+                    Seamlessly allows users to automatically or manually book consultations
+                    with verified lawyers through a secure system.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="map-content">
+            <span class="section-subtitle">Location Intelligence</span>
+            <h3>Real-time Attorney &amp; Court Locator.</h3>
+            <p>
+                A robust, map-based interface that displays nearby private lawyers,
+                legal aid services, and court locations. Navigate the legal landscape
+                of your city with unparalleled ease and clarity.
+            </p>
+        </div>
+
+        <div class="map-visual">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126749.11718012675!2d125.60333066465035!3d7.29177197022802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f95d852cb52191%3A0xc6cf6289d0cfaea0!2sPanabo%2C%20Davao%20del%20Norte!5e0!3m2!1sen!2sph!4v1716120000000!5m2!1sen!2sph"
+                width="100%"
+                height="100%"
+                style="border: 0;"
+                allowfullscreen=""
+                loading="lazy"
+            ></iframe>
+        </div>
+    </section>
+
+    <section class="extra-info">
+        <div class="extra-text">
+            <h3>AI Case Summarization</h3>
+            <p>
+                Generates a clear, concise, and professional summary of your concern
+                to be reviewed before sharing with your selected lawyer.
+            </p>
+        </div>
+
+        <div class="extra-text">
+            <h3>Privacy-First Data</h3>
+            <p>
+                Built with uncompromising security: encrypted communications,
+                consent-based data sharing, and complete user control.
+            </p>
+        </div>
+    </section>
+
+    <section class="promo-section" id="download">
+        <div class="promo-box">
+            <h2>Why choose <span class="promo-highlight">LexLink AI</span>?</h2>
+            <p>
+                LexLink AI is built to make legal help more accessible, less intimidating,
+                and more efficient for everyone. Instead of struggling through confusing
+                legal searches and delayed consultations, users can instantly describe
+                their concern, receive AI-assisted legal guidance, get matched with the
+                right lawyer, and move forward with greater confidence. With smart case
+                classification, secure communication, privacy-first data handling, and
+                location-based attorney discovery,
+                <span class="promo-highlight">
+                    LexLink AI transforms legal assistance into a faster, safer,
+                    and smarter experience.
+                </span>
+            </p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p>
+                        “I liked that the app gave me a clear summary before I talked to a lawyer.
+                        It made me feel less nervous and more prepared during the consultation.”
+                    </p>
+                    <div class="testimonial-meta">M. Reyes · Verified user</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p>
+                        “The lawyer matching felt practical, not random. I was able to find someone
+                        near my area who handled the exact concern I had.”
+                    </p>
+                    <div class="testimonial-meta">A. Dela Cruz · Verified user</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★☆</div>
+                    <p>
+                        “What stood out to me was the privacy side. I could explain my concern first
+                        without feeling like I had to share everything immediately.”
+                    </p>
+                    <div class="testimonial-meta">J. Santos · Early client feedback</div>
+                </div>
+            </div>
+
+            <div class="promo-actions">
+                <a href="#" class="btn-pill">Get LexLink AI</a>
+                <a href="#pricing" class="btn-outline">View Plans</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section" id="pricing">
+        <div class="pricing-title-wrap">
+            <h2>Choose Your Access</h2>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                        <path d="M2 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                        <path d="M7 21h10"></path>
+                        <path d="M12 3v18"></path>
+                        <path d="M3 7h18"></path>
+                    </svg>
+                    Free Core Access
+                </h3>
+
+                <span class="cost">
+                    ₱ 0
+                    <small>/ lifetime</small>
+                </span>
+
+                <ul>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        15 AI Consultation messages per day
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Case Summarization &amp; Matching
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        10 MB Document Upload
+                    </li>
+                </ul>
+            </div>
+
+            <div class="price-card premium">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <path d="M6 12h12"></path>
+                        <path d="M6 16h12"></path>
+                        <path d="M10 9H8"></path>
+                    </svg>
+                    Membership Plan
+                </h3>
+
+                <span class="cost">
+                    ₱ 3,000
+                    <small>/ 6 months</small>
+                </span>
+
+                <ul>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Unlimited AI Consultation chats
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        100 MB Document Upload
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        10% Discount on Partner Services
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section" id="process">
+        <div class="section-header">
+            <span class="section-subtitle">User Journey</span>
+            <h2 class="section-title">Seamless resolution.</h2>
+        </div>
+
+        <div class="timeline-grid">
+            <div class="timeline-step">
+                <div class="timeline-node">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </div>
+                <h4>Download</h4>
+                <p>Get the LexLink AI app for fast and easy access to legal assistance.</p>
+            </div>
+
+            <div class="timeline-step">
+                <div class="timeline-node">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <h4>Consult</h4>
+                <p>Share your situation through our secure AI chatbot and receive guidance.</p>
+            </div>
+
+            <div class="timeline-step">
+                <div class="timeline-node">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <polyline points="17 11 19 13 23 9"></polyline>
+                    </svg>
+                </div>
+                <h4>Match</h4>
+                <p>Get matched with the most suitable lawyer tailored to your exact needs.</p>
+            </div>
+
+            <div class="timeline-step">
+                <div class="timeline-node">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h4>Resolve</h4>
+                <p>Proceed with the consultation and take the next step with confidence.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section" id="team">
+        <h2>The Brilliant Minds</h2>
+        <p>Davao del Norte State College</p>
+
+        <div class="dev-grid">
+            <div class="dev-profile">
+                <div class="dev-img" style="background-image: url('Jerlyn_portrait.jpg');"></div>
+                <div class="dev-name">Jerlyn P. Corpuz</div>
+                <div class="dev-role">CEO</div>
+                <div class="dev-desc">
+                    Drives the overall vision, strategy, and continuous growth of LexLink AI.
+                </div>
+            </div>
+
+            <div class="dev-profile">
+                <div class="dev-img" style="background-image: url('Christian_portrait.jpeg');"></div>
+                <div class="dev-name">Christian J. Misal</div>
+                <div class="dev-role">CTO</div>
+                <div class="dev-desc">
+                    Leads technical architecture, AI development, and robust platform security.
+                </div>
+            </div>
+
+            <div class="dev-profile">
+                <div class="dev-img" style="background-image: url('Jojie_portrait.jpeg');"></div>
+                <div class="dev-name">Jojie G. Rodriguez</div>
+                <div class="dev-role">CMO</div>
+                <div class="dev-desc">
+                    Spearheads user acquisition, brand positioning, and dynamic market outreach.
+                </div>
+            </div>
+
+            <div class="dev-profile">
+                <div class="dev-img" style="background-image: url('Denniela_portrait.jpeg');"></div>
+                <div class="dev-name">Denniela V. Tingson</div>
+                <div class="dev-role">COO</div>
+                <div class="dev-desc">
+                    Ensures smooth daily operations, strategic partnerships, and seamless service execution.
+                </div>
+            </div>
+        </div>
+
+        <p class="copyright">© 2026 LexLink AI. Building a fair legal system.</p>
+    </section>
+
+    <footer class="site-footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                    <span>LexLink AI</span>
+                </div>
+                <p>
+                    A smarter legal-tech platform that helps people connect with the right
+                    legal support through speed, privacy, and reliable digital guidance.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contact Details</h4>
+                <p>Email: lexlinkai@gmail.com</p>
+                <p>Phone: +63 912 345 6789</p>
+                <p>Location: Panabo City, Davao del Norte</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#solution">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#team">Team</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="footer-copy">© 2026 LexLink AI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function openMenu() {
+            const navLinks = document.getElementById("navLinks");
+            const menuToggle = document.getElementById("menuToggle");
+            const menuBackdrop = document.getElementById("menuBackdrop");
+
+            navLinks.classList.add("show");
+            menuBackdrop.classList.add("show");
+            menuToggle.textContent = "✕";
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById("navLinks");
+            const menuToggle = document.getElementById("menuToggle");
+            const menuBackdrop = document.getElementById("menuBackdrop");
+
+            navLinks.classList.remove("show");
+            menuBackdrop.classList.remove("show");
+            menuToggle.textContent = "☰";
+        }
+
+        function toggleMenu() {
+            const navLinks = document.getElementById("navLinks");
+
+            if (navLinks.classList.contains("show")) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
+
+        document.querySelectorAll("#navLinks a").forEach((link) => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth <= 768) {
+                    closeMenu();
+                }
+            });
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>
